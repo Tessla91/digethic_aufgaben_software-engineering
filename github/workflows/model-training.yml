@@ -1,8 +1,8 @@
 name: model-training
-run-name: ${{ github.actor }} is learning GitHub Actions
 on:
   pull_request:
     types: [opened, synchronize]
+
 jobs:
   model-training:
     runs-on: ubuntu-latest
@@ -10,14 +10,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: "3.9"
       - run: pip install -r requirements.txt
       - run: python src/train.py
       - uses: actions/upload-artifact@v4
         with:
-        # Name of the artifact to upload.
+          # Name of the artifact to upload.
+          # Optional. Default is 'artifact'
           name: regression.pickle
-          path: ./data/models/regression.pickle
-
-
-
+          # A file, directory or wildcard pattern that describes what to upload
+          # Required.
+          path: .data/models/regression.pickle
