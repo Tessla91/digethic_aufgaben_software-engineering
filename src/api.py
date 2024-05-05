@@ -39,6 +39,7 @@ def predict():
         prediction = trained_model.predict([[zylinder, ps, gewicht, beschleunigung, baujahr]])
         return {"result": prediction [0]}
     else:
-        return Response ("Please provide all necessary parameters to ger a prediciton", mimetype="application/json")
+        return Response ("Please provide all necessary parameters to get a prediction", mimetype="application/json")
+
 
 
