@@ -35,10 +35,14 @@ def predict():
     beschleunigung = float(request.args.get("beschleunigung"))
     baujahr = float(request.args.get("baujahr"))
 
+    #feature_names = ["zylinder", "ps", "gewicht", "beschleunigung", "baujahr"]
+    #input_data = pd.DataFrame([[zylinder, ps, gewicht, beschleunigung, baujahr]], columns=feature_names)
+
     if (zylinder and ps and gewicht and beschleunigung and baujahr):
         prediction = trained_model.predict([[zylinder, ps, gewicht, beschleunigung, baujahr]])
-        return {"result": prediction [0]}
+        #return Response (prediction[0], mimetype="application/json")
+        return {"result": prediction.item(0)}
     else:
-        return Response ("Please provide all necessary parameters to ger a prediciton", mimetype="application/json")
+        return Response ("Please provide all necessary parameters to get a prediciton", mimetype="application/json")
 
 
