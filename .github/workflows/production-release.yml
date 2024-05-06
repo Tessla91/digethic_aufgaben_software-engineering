@@ -10,26 +10,26 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Switch to heroku branch
-            shell: bash
-            run: |
-                git config --global user.email ""
-                git config --global user.name "Github Actions"
-                git fetch --all --unshallow
-                git checkout heroku 2>/dev/null || git checkout -b heroku
-                git merge heroku_neu -X theirs --allow-unrelated-histories
+                shell: bash
+                run: |
+                    git config --global user.email ""
+                    git config --global user.name "Github Actions"
+                    git fetch --all --unshallow
+                    git checkout heroku 2>/dev/null || git checkout -b heroku
+                    git merge heroku_neu -X theirs --allow-unrelated-histories
             - name: Set up Python
-            uses: actions/setup-python@v2
-            with:
-                python-version: "3.9"
+                uses: actions/setup-python@v2
+                with:
+                    python-version: "3.9"
             - name: Install dependencies
-            run: pip install -r requirements.txt
-            - name: Train model
-            run: python src/train.py
+                run: pip install -r requirements.txt
+            - name: train model
+                run: python src/train.py
             - name: Upload trained model
-            uses: actions/upload-artifact@v2
-            with:
-                name: regression.pickle
-                path: data/models/regression.pickle
+                uses: actions/upload-artifact@v2
+                with:
+                    name: regression.pickle
+                    path: data/models/regression.pickle
             - name: Push changes to heroku branch
                 shell: bash
                 run: |
